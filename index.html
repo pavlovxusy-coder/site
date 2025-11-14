@@ -593,6 +593,128 @@
                 padding: 60px 20px;
             }
         }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 48px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            font-size: 28px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .modal-subtitle {
+            font-size: 16px;
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .modal-options {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .modal-option {
+            padding: 24px;
+            background: var(--bg-dark);
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .modal-option:hover {
+            border-color: rgba(102, 126, 234, 0.5);
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+        }
+
+        .modal-option-icon {
+            font-size: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 32px 24px;
+            }
+
+            .modal-title {
+                font-size: 24px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -600,27 +722,27 @@
         <div class="logo">CDCOIL</div>
         <div class="header-buttons">
             <div class="dropdown">
-                <button class="btn" onclick="toggleDropdown()">ИНФО</button>
+                <button class="btn" id="infoBtn" onclick="toggleDropdown()">ИНФО</button>
                 <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="#about">О лейбле</a>
-                    <a href="#faq">FAQ</a>
-                    <a href="#cta">Отправить демо</a>
-                    <a href="#contact">Связаться с нами</a>
+                    <a href="#about" data-lang-ru="О лейбле" data-lang-en="About Label">О лейбле</a>
+                    <a href="#faq" data-lang-ru="FAQ" data-lang-en="FAQ">FAQ</a>
+                    <a href="#cta" data-lang-ru="Отправить демо" data-lang-en="Send Demo">Отправить демо</a>
+                    <a href="#contact" data-lang-ru="Связаться с нами" data-lang-en="Contact Us">Связаться с нами</a>
                 </div>
             </div>
-            <button class="btn" onclick="toggleLanguage()">EN</button>
+            <button class="btn" id="langBtn" onclick="toggleLanguage()">EN</button>
         </div>
     </header>
 
     <section class="hero">
         <div class="container">
             <div class="hero-content fade-in">
-                <div class="subtitle">Музыкальный Лейбл</div>
+                <div class="subtitle" data-lang-ru="Музыкальный Лейбл" data-lang-en="Music Label">Музыкальный Лейбл</div>
                 <h1>CDCOIL</h1>
-                <p>Загружай свою музыку на все цифровые площадки и получай прибыль с прослушиваний и продаж</p>
+                <p data-lang-ru="Загружай свою музыку на все цифровые площадки и получай прибыль с прослушиваний и продаж" data-lang-en="Upload your music to all digital platforms and earn profit from streams and sales">Загружай свою музыку на все цифровые площадки и получай прибыль с прослушиваний и продаж</p>
                 <div class="hero-buttons">
-                    <a href="#cta" class="btn btn-gradient">СТАТЬ АРТИСТОМ</a>
-                    <a href="#releases" class="btn">НАШИ РЕЛИЗЫ</a>
+                    <a href="#cta" class="btn btn-gradient" data-lang-ru="СТАТЬ АРТИСТОМ" data-lang-en="BECOME AN ARTIST">СТАТЬ АРТИСТОМ</a>
+                    <a href="#releases" class="btn" data-lang-ru="НАШИ РЕЛИЗЫ" data-lang-en="OUR RELEASES">НАШИ РЕЛИЗЫ</a>
                 </div>
             </div>
         </div>
@@ -628,36 +750,36 @@
 
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">О ЛЕЙБЛЕ</h2>
+            <h2 class="section-title" data-lang-ru="О ЛЕЙБЛЕ" data-lang-en="ABOUT LABEL">О ЛЕЙБЛЕ</h2>
             <div class="about-content">
-                <p>CDCOIL — независимый лейбл и дистрибьютор. Мы выводим музыку артистов на Spotify, Apple Music, YouTube Music, Яндекс.Музыка и более чем 150 других сервисов по всему миру.</p>
+                <p data-lang-ru="CDCOIL — независимый лейбл и дистрибьютор. Мы выводим музыку артистов на Spotify, Apple Music, YouTube Music, Яндекс.Музыка и более чем 150 других сервисов по всему миру." data-lang-en="CDCOIL is an independent label and distributor. We release artists' music on Spotify, Apple Music, YouTube Music, Yandex.Music and more than 150 other services worldwide.">CDCOIL — независимый лейбл и дистрибьютор. Мы выводим музыку артистов на Spotify, Apple Music, YouTube Music, Яндекс.Музыка и более чем 150 других сервисов по всему миру.</p>
                 <ul class="features">
-                    <li class="feature-item">70% дохода — тебе</li>
-                    <li class="feature-item">Публикация за 3 дня</li>
-                    <li class="feature-item">Без скрытых комиссий</li>
-                    <li class="feature-item">Сохранение авторских прав</li>
-                    <li class="feature-item">Поддержка на всех этапах</li>
+                    <li class="feature-item" data-lang-ru="70% дохода — тебе" data-lang-en="70% of income — to you">70% дохода — тебе</li>
+                    <li class="feature-item" data-lang-ru="Публикация за 3 дня" data-lang-en="Publication in 3 days">Публикация за 3 дня</li>
+                    <li class="feature-item" data-lang-ru="Без скрытых комиссий" data-lang-en="No hidden fees">Без скрытых комиссий</li>
+                    <li class="feature-item" data-lang-ru="Сохранение авторских прав" data-lang-en="Copyright protection">Сохранение авторских прав</li>
+                    <li class="feature-item" data-lang-ru="Поддержка на всех этапах" data-lang-en="Support at all stages">Поддержка на всех этапах</li>
                 </ul>
-                <p class="mission">Наша миссия — дать каждому музыканту равные возможности для выхода на глобальный рынок.</p>
+                <p class="mission" data-lang-ru="Наша миссия — дать каждому музыканту равные возможности для выхода на глобальный рынок." data-lang-en="Our mission is to give every musician equal opportunities to enter the global market.">Наша миссия — дать каждому музыканту равные возможности для выхода на глобальный рынок.</p>
             </div>
         </div>
     </section>
 
     <section id="stats" class="stats-section">
         <div class="container">
-            <h2 class="section-title">В ЦИФРАХ</h2>
+            <h2 class="section-title" data-lang-ru="В ЦИФРАХ" data-lang-en="IN NUMBERS">В ЦИФРАХ</h2>
             <div class="stats">
                 <div class="stat-item">
                     <div class="stat-number">24/7</div>
-                    <div class="stat-label">ВСЕГДА НА СВЯЗИ</div>
+                    <div class="stat-label" data-lang-ru="ВСЕГДА НА СВЯЗИ" data-lang-en="ALWAYS IN TOUCH">ВСЕГДА НА СВЯЗИ</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">100+</div>
-                    <div class="stat-label">ВЫПУЩЕННЫХ РЕЛИЗОВ</div>
+                    <div class="stat-label" data-lang-ru="ВЫПУЩЕННЫХ РЕЛИЗОВ" data-lang-en="RELEASES PUBLISHED">ВЫПУЩЕННЫХ РЕЛИЗОВ</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">1 МЛН+</div>
-                    <div class="stat-label">ПРОСЛУШИВАНИЙ КАТАЛОГА</div>
+                    <div class="stat-label" data-lang-ru="ПРОСЛУШИВАНИЙ КАТАЛОГА" data-lang-en="CATALOG STREAMS">ПРОСЛУШИВАНИЙ КАТАЛОГА</div>
                 </div>
             </div>
         </div>
@@ -665,19 +787,19 @@
 
     <section id="how-it-works" class="how-it-works">
         <div class="container">
-            <h2 class="section-title">КАК ЭТО РАБОТАЕТ</h2>
+            <h2 class="section-title" data-lang-ru="КАК ЭТО РАБОТАЕТ" data-lang-en="HOW IT WORKS">КАК ЭТО РАБОТАЕТ</h2>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">01</div>
-                    <div class="step-text">Напиши в поддержку или отправь демо на cdcoil@bk.ru</div>
+                    <div class="step-text" data-lang-ru="Напиши в поддержку или отправь демо на cdcoil@bk.ru" data-lang-en="Write to support or send a demo to cdcoil@bk.ru">Напиши в поддержку или отправь демо на cdcoil@bk.ru</div>
                 </div>
                 <div class="step">
                     <div class="step-number">02</div>
-                    <div class="step-text">Получи обратную связь и форму на заполнение релизов</div>
+                    <div class="step-text" data-lang-ru="Получи обратную связь и форму на заполнение релизов" data-lang-en="Get feedback and a form to fill out for releases">Получи обратную связь и форму на заполнение релизов</div>
                 </div>
                 <div class="step">
                     <div class="step-number">03</div>
-                    <div class="step-text">Релиз выходит в выбранную дату. Выплаты — ежеквартально</div>
+                    <div class="step-text" data-lang-ru="Релиз выходит в выбранную дату. Выплаты — ежеквартально" data-lang-en="The release comes out on the selected date. Payments — quarterly">Релиз выходит в выбранную дату. Выплаты — ежеквартально</div>
                 </div>
             </div>
         </div>
@@ -688,16 +810,16 @@
             <h2 class="section-title">FAQ</h2>
             <div class="faq">
                 <div class="faq-item">
-                    <div class="faq-question">Сколько стоит публикация?</div>
-                    <div class="faq-answer">Бесплатно. Мы получаем 30% от роялти.</div>
+                    <div class="faq-question" data-lang-ru="Сколько стоит публикация?" data-lang-en="How much does publication cost?">Сколько стоит публикация?</div>
+                    <div class="faq-answer" data-lang-ru="Бесплатно. Мы получаем 30% от роялти." data-lang-en="Free. We get 30% of royalties.">Бесплатно. Мы получаем 30% от роялти.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">Могу ли я забрать релиз обратно?</div>
-                    <div class="faq-answer">Да — в любой момент, без штрафов.</div>
+                    <div class="faq-question" data-lang-ru="Могу ли я забрать релиз обратно?" data-lang-en="Can I take the release back?">Могу ли я забрать релиз обратно?</div>
+                    <div class="faq-answer" data-lang-ru="Да — в любой момент, без штрафов." data-lang-en="Yes — at any time, without penalties.">Да — в любой момент, без штрафов.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">С какими жанрами вы работаете?</div>
-                    <div class="faq-answer">С любыми.</div>
+                    <div class="faq-question" data-lang-ru="С какими жанрами вы работаете?" data-lang-en="What genres do you work with?">С какими жанрами вы работаете?</div>
+                    <div class="faq-answer" data-lang-ru="С любыми." data-lang-en="With any.">С любыми.</div>
                 </div>
             </div>
         </div>
@@ -705,9 +827,9 @@
 
     <section id="cta" class="cta-section">
         <div class="container">
-            <h2>ГОТОВ К РЕЛИЗУ?</h2>
-            <p>Выбери, как отправить демо</p>
-            <a href="mailto:cdcoil@bk.ru" class="btn btn-gradient">ОТПРАВИТЬ ДЕМО</a>
+            <h2 data-lang-ru="ГОТОВ К РЕЛИЗУ?" data-lang-en="READY FOR RELEASE?">ГОТОВ К РЕЛИЗУ?</h2>
+            <p data-lang-ru="Выбери, как отправить демо" data-lang-en="Choose how to send a demo">Выбери, как отправить демо</p>
+            <a href="#" class="btn btn-gradient" onclick="openModal(event)" data-lang-ru="ОТПРАВИТЬ ДЕМО" data-lang-en="SEND DEMO">ОТПРАВИТЬ ДЕМО</a>
         </div>
     </section>
 
@@ -725,16 +847,118 @@
         </div>
     </footer>
 
+    <!-- Modal -->
+    <div id="demoModal" class="modal" onclick="closeModalOnBackdrop(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 class="modal-title" data-lang-ru="Отправить демо" data-lang-en="Send Demo">Отправить демо</h2>
+            <p class="modal-subtitle" data-lang-ru="Выбери способ отправки" data-lang-en="Choose sending method">Выбери способ отправки</p>
+            <div class="modal-options">
+                <a href="https://t.me/cdcultrecords_bot" target="_blank" class="modal-option" onclick="closeModal()">
+                    <span class="modal-option-icon">✈️</span>
+                    <span data-lang-ru="Telegram" data-lang-en="Telegram">Telegram</span>
+                </a>
+                <a href="mailto:cdcoil@bk.ru" class="modal-option" onclick="closeModal()">
+                    <span class="modal-option-icon">✉️</span>
+                    <span data-lang-ru="Email" data-lang-en="Email">Email</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Языковые настройки
+        let currentLang = localStorage.getItem('language') || 'ru';
+        
+        // Переводы для кнопки ИНФО
+        const infoBtnTexts = {
+            ru: 'ИНФО',
+            en: 'INFO'
+        };
+
         function toggleDropdown() {
             const menu = document.getElementById('dropdownMenu');
             menu.classList.toggle('active');
         }
 
-        function toggleLanguage() {
-            // Здесь можно добавить функционал переключения языка
-            console.log('Переключение языка');
+        // Modal functions
+        function openModal(event) {
+            event.preventDefault();
+            const modal = document.getElementById('demoModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
+
+        function closeModal() {
+            const modal = document.getElementById('demoModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeModalOnBackdrop(event) {
+            if (event.target.id === 'demoModal') {
+                closeModal();
+            }
+        }
+
+        // Закрытие модального окна по Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        function toggleLanguage() {
+            // Переключаем язык
+            currentLang = currentLang === 'ru' ? 'en' : 'ru';
+            localStorage.setItem('language', currentLang);
+            
+            // Обновляем все элементы с data-атрибутами
+            document.querySelectorAll('[data-lang-ru][data-lang-en]').forEach(element => {
+                const text = currentLang === 'ru' 
+                    ? element.getAttribute('data-lang-ru') 
+                    : element.getAttribute('data-lang-en');
+                element.textContent = text;
+            });
+            
+            // Обновляем кнопку языка
+            const langBtn = document.getElementById('langBtn');
+            langBtn.textContent = currentLang === 'ru' ? 'EN' : 'RU';
+            
+            // Обновляем кнопку ИНФО
+            const infoBtn = document.getElementById('infoBtn');
+            infoBtn.textContent = infoBtnTexts[currentLang];
+            
+            // Обновляем атрибут lang у html
+            document.documentElement.lang = currentLang;
+            
+            // Обновляем title страницы
+            document.title = currentLang === 'ru' 
+                ? 'CDCOIL — Музыкальный Лейбл' 
+                : 'CDCOIL — Music Label';
+        }
+
+        // Загружаем сохраненный язык при загрузке страницы
+        function initLanguage() {
+            if (currentLang === 'en') {
+                // Применяем английский язык без переключения
+                document.querySelectorAll('[data-lang-ru][data-lang-en]').forEach(element => {
+                    element.textContent = element.getAttribute('data-lang-en');
+                });
+                
+                const langBtn = document.getElementById('langBtn');
+                langBtn.textContent = 'RU';
+                
+                const infoBtn = document.getElementById('infoBtn');
+                infoBtn.textContent = infoBtnTexts['en'];
+                
+                document.documentElement.lang = 'en';
+                document.title = 'CDCOIL — Music Label';
+            }
+        }
+        
+        // Инициализируем язык при загрузке
+        document.addEventListener('DOMContentLoaded', initLanguage);
 
         // Закрытие dropdown при клике вне его
         document.addEventListener('click', function(event) {
