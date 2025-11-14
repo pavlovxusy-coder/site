@@ -3,8 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CDCULT RECORDS</title>
+    <title>CDCOIL — Музыкальный Лейбл</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #ffffff;
+            --secondary: #a0a0a0;
+            --accent: #6366f1;
+            --accent-hover: #4f46e5;
+            --bg-dark: #0a0a0a;
+            --bg-card: #111111;
+            --border: rgba(255, 255, 255, 0.1);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,17 +26,19 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--primary);
+            line-height: 1.7;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         /* Header */
@@ -30,53 +46,73 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 40px;
+            padding: 24px 40px;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            background-color: rgba(0, 0, 0, 0.9);
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 16px 40px;
+            background: rgba(10, 10, 10, 0.95);
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .header-buttons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
+            align-items: center;
         }
 
         .btn {
-            padding: 10px 20px;
-            border: 1px solid #fff;
+            padding: 12px 24px;
+            border: 1.5px solid var(--primary);
             background: transparent;
-            color: #fff;
+            color: var(--primary);
             cursor: pointer;
-            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
             font-size: 14px;
-            transition: all 0.3s;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
             display: inline-block;
+            border-radius: 4px;
         }
 
         .btn:hover {
-            background: #fff;
-            color: #000;
+            background: var(--primary);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
         }
 
-        .btn-white {
-            background: #fff;
-            color: #000;
+        .btn-gradient {
+            background: var(--gradient);
+            border: none;
+            color: var(--primary);
         }
 
-        .btn-white:hover {
-            background: transparent;
-            color: #fff;
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
         }
 
         .dropdown {
@@ -86,27 +122,42 @@
         .dropdown-menu {
             display: none;
             position: absolute;
-            top: 100%;
+            top: calc(100% + 12px);
             right: 0;
-            margin-top: 10px;
-            background: #000;
-            border: 1px solid #fff;
-            min-width: 200px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            min-width: 220px;
             z-index: 1001;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
         .dropdown-menu.active {
             display: block;
+            animation: fadeInDown 0.3s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .dropdown-menu a {
             display: block;
-            padding: 12px 20px;
-            color: #fff;
+            padding: 14px 20px;
+            color: var(--primary);
             text-decoration: none;
-            text-transform: uppercase;
-            font-size: 12px;
-            border-bottom: 1px solid #333;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            border-bottom: 1px solid var(--border);
         }
 
         .dropdown-menu a:last-child {
@@ -114,8 +165,8 @@
         }
 
         .dropdown-menu a:hover {
-            background: #fff;
-            color: #000;
+            background: rgba(255, 255, 255, 0.05);
+            padding-left: 24px;
         }
 
         /* Hero Section */
@@ -126,31 +177,57 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 120px 20px 60px;
+            padding: 140px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
         }
 
         .hero h1 {
-            font-size: 48px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-            font-weight: 300;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(42px, 8vw, 72px);
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .hero h2 {
-            font-size: 18px;
+        .hero .subtitle {
+            font-size: clamp(16px, 2vw, 20px);
+            font-weight: 400;
+            color: var(--secondary);
+            margin-bottom: 16px;
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin-bottom: 40px;
-            font-weight: 300;
-            opacity: 0.9;
         }
 
         .hero p {
-            font-size: 16px;
-            max-width: 600px;
-            margin-bottom: 50px;
+            font-size: clamp(16px, 2vw, 20px);
+            max-width: 700px;
+            margin: 0 auto 48px;
             line-height: 1.8;
+            color: var(--secondary);
+            font-weight: 300;
         }
 
         .hero-buttons {
@@ -162,194 +239,288 @@
 
         /* Sections */
         section {
-            padding: 80px 20px;
-            border-top: 1px solid #333;
+            padding: 100px 20px;
+            position: relative;
         }
 
-        section h2 {
-            font-size: 32px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 40px;
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
             text-align: center;
-            font-weight: 300;
+            margin-bottom: 60px;
+            letter-spacing: -0.5px;
         }
 
+        /* About Section */
         .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-content p {
-            font-size: 16px;
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-
-        .features {
-            list-style: none;
-            margin: 40px 0;
-            text-align: left;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .features li {
-            padding: 15px 0;
-            font-size: 16px;
-            border-bottom: 1px solid #333;
-        }
-
-        .features li:last-child {
-            border-bottom: none;
-        }
-
-        .features li:before {
-            content: "• ";
-            margin-right: 10px;
-        }
-
-        .mission {
-            margin-top: 40px;
-            font-size: 18px;
-            font-style: italic;
-            opacity: 0.9;
-        }
-
-        /* Stats Section */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
             max-width: 900px;
             margin: 0 auto;
             text-align: center;
         }
 
+        .about-content p {
+            font-size: 18px;
+            line-height: 2;
+            margin-bottom: 40px;
+            color: var(--secondary);
+        }
+
+        .features {
+            list-style: none;
+            margin: 50px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-item {
+            padding: 32px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-4px);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-item::before {
+            content: "✓";
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: var(--gradient);
+            border-radius: 50%;
+            color: var(--primary);
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            margin-right: 16px;
+            margin-bottom: 12px;
+        }
+
+        .feature-item {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .mission {
+            margin-top: 60px;
+            font-size: 20px;
+            font-style: italic;
+            color: var(--secondary);
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
         .stat-item {
-            padding: 30px;
+            padding: 48px 32px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-8px);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
         }
 
         .stat-number {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 15px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(40px, 6vw, 64px);
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-label {
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            opacity: 0.8;
+            color: var(--secondary);
+            font-weight: 500;
         }
 
         /* How It Works */
         .steps {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .step {
-            margin-bottom: 40px;
-            padding-left: 60px;
+            margin-bottom: 48px;
+            padding: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateX(8px);
+            border-color: rgba(102, 126, 234, 0.5);
         }
 
         .step-number {
             position: absolute;
-            left: 0;
-            top: 0;
+            left: -20px;
+            top: 40px;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 24px;
-            font-weight: bold;
-            opacity: 0.5;
+            font-weight: 700;
+            color: var(--primary);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
         }
 
         .step-text {
-            font-size: 16px;
+            font-size: 18px;
             line-height: 1.8;
+            color: var(--secondary);
+            padding-left: 60px;
         }
 
         /* FAQ */
         .faq {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .faq-item {
-            margin-bottom: 30px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #333;
+            margin-bottom: 24px;
+            padding: 32px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s ease;
         }
 
-        .faq-item:last-child {
-            border-bottom: none;
+        .faq-item:hover {
+            border-color: rgba(102, 126, 234, 0.5);
         }
 
         .faq-question {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--primary);
         }
 
         .faq-answer {
             font-size: 16px;
             line-height: 1.8;
-            opacity: 0.9;
+            color: var(--secondary);
         }
 
         /* CTA Section */
         .cta-section {
             text-align: center;
-            padding: 100px 20px;
+            padding: 120px 20px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 24px;
+            margin: 40px;
+            border: 1px solid var(--border);
         }
 
         .cta-section h2 {
-            font-size: 42px;
-            margin-bottom: 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
         }
 
         .cta-section p {
             font-size: 18px;
             margin-bottom: 40px;
-            opacity: 0.9;
+            color: var(--secondary);
         }
 
         /* Footer */
         footer {
-            padding: 60px 20px 40px;
+            padding: 80px 20px 40px;
             text-align: center;
-            border-top: 1px solid #333;
+            border-top: 1px solid var(--border);
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
+            gap: 40px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
         }
 
         .social-links a {
-            color: #fff;
+            color: var(--primary);
             text-decoration: none;
-            text-transform: uppercase;
-            font-size: 14px;
-            letter-spacing: 1px;
-            transition: opacity 0.3s;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .social-links a:hover {
-            opacity: 0.7;
+        .social-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .social-links a:hover::after {
+            width: 100%;
         }
 
         .footer-info {
-            font-size: 12px;
-            opacity: 0.7;
-            margin-top: 20px;
+            font-size: 14px;
+            color: var(--secondary);
+            margin-top: 32px;
+            line-height: 2;
         }
 
         /* Smooth Scroll */
@@ -357,14 +528,30 @@
             scroll-behavior: smooth;
         }
 
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 32px;
+            header {
+                padding: 16px 20px;
             }
 
-            .hero h2 {
-                font-size: 14px;
+            .hero {
+                padding: 120px 20px 60px;
             }
 
             .hero-buttons {
@@ -380,23 +567,37 @@
                 grid-template-columns: 1fr;
             }
 
+            .features {
+                grid-template-columns: 1fr;
+            }
+
             .step {
-                padding-left: 40px;
+                padding: 24px;
             }
 
-            header {
-                padding: 20px;
+            .step-number {
+                position: static;
+                margin-bottom: 20px;
             }
 
-            .logo {
-                font-size: 18px;
+            .step-text {
+                padding-left: 0;
+            }
+
+            .cta-section {
+                margin: 20px;
+                padding: 60px 20px;
+            }
+
+            section {
+                padding: 60px 20px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">CDCULT RECORDS</div>
+    <header id="header">
+        <div class="logo">CDCOIL</div>
         <div class="header-buttons">
             <div class="dropdown">
                 <button class="btn" onclick="toggleDropdown()">ИНФО</button>
@@ -413,27 +614,29 @@
 
     <section class="hero">
         <div class="container">
-            <h1>CDCULT RECORDS —</h1>
-            <h2>МУЗЫКАЛЬНЫЙ ЛЕЙБЛ</h2>
-            <p>Загружай свою музыку на все цифровые площадки и получай прибыль с прослушиваний и продаж</p>
-            <div class="hero-buttons">
-                <a href="#cta" class="btn btn-white">СТАТЬ АРТИСТОМ</a>
-                <a href="#releases" class="btn">НАШИ РЕЛИЗЫ</a>
+            <div class="hero-content fade-in">
+                <div class="subtitle">Музыкальный Лейбл</div>
+                <h1>CDCOIL</h1>
+                <p>Загружай свою музыку на все цифровые площадки и получай прибыль с прослушиваний и продаж</p>
+                <div class="hero-buttons">
+                    <a href="#cta" class="btn btn-gradient">СТАТЬ АРТИСТОМ</a>
+                    <a href="#releases" class="btn">НАШИ РЕЛИЗЫ</a>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="about" class="about">
         <div class="container">
-            <h2>О ЛЕЙБЛЕ</h2>
+            <h2 class="section-title">О ЛЕЙБЛЕ</h2>
             <div class="about-content">
-                <p>CDCULT RECORDS — независимый лейбл и дистрибьютор. Мы выводим музыку артистов на Spotify, Apple Music, YouTube Music, Яндекс.Музыка и более чем 150 других сервисов по всему миру.</p>
+                <p>CDCOIL — независимый лейбл и дистрибьютор. Мы выводим музыку артистов на Spotify, Apple Music, YouTube Music, Яндекс.Музыка и более чем 150 других сервисов по всему миру.</p>
                 <ul class="features">
-                    <li>70% дохода — тебе</li>
-                    <li>Публикация за 3 дня</li>
-                    <li>Без скрытых комиссий</li>
-                    <li>Сохранение авторских прав</li>
-                    <li>Поддержка на всех этапах</li>
+                    <li class="feature-item">70% дохода — тебе</li>
+                    <li class="feature-item">Публикация за 3 дня</li>
+                    <li class="feature-item">Без скрытых комиссий</li>
+                    <li class="feature-item">Сохранение авторских прав</li>
+                    <li class="feature-item">Поддержка на всех этапах</li>
                 </ul>
                 <p class="mission">Наша миссия — дать каждому музыканту равные возможности для выхода на глобальный рынок.</p>
             </div>
@@ -442,7 +645,7 @@
 
     <section id="stats" class="stats-section">
         <div class="container">
-            <h2>В ЦИФРАХ</h2>
+            <h2 class="section-title">В ЦИФРАХ</h2>
             <div class="stats">
                 <div class="stat-item">
                     <div class="stat-number">24/7</div>
@@ -462,11 +665,11 @@
 
     <section id="how-it-works" class="how-it-works">
         <div class="container">
-            <h2>КАК ЭТО РАБОТАЕТ</h2>
+            <h2 class="section-title">КАК ЭТО РАБОТАЕТ</h2>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">01</div>
-                    <div class="step-text">Напиши в поддержку или отправь демо на cdcult@bk.ru</div>
+                    <div class="step-text">Напиши в поддержку или отправь демо на cdcoil@bk.ru</div>
                 </div>
                 <div class="step">
                     <div class="step-number">02</div>
@@ -482,7 +685,7 @@
 
     <section id="faq" class="faq-section">
         <div class="container">
-            <h2>FAQ</h2>
+            <h2 class="section-title">FAQ</h2>
             <div class="faq">
                 <div class="faq-item">
                     <div class="faq-question">Сколько стоит публикация?</div>
@@ -504,7 +707,7 @@
         <div class="container">
             <h2>ГОТОВ К РЕЛИЗУ?</h2>
             <p>Выбери, как отправить демо</p>
-            <a href="mailto:cdcult@bk.ru" class="btn btn-white">ОТПРАВИТЬ ДЕМО</a>
+            <a href="mailto:cdcoil@bk.ru" class="btn btn-gradient">ОТПРАВИТЬ ДЕМО</a>
         </div>
     </section>
 
@@ -516,8 +719,8 @@
                 <a href="#">TikTok</a>
             </div>
             <div class="footer-info">
-                <p>© 2024-2026 CDCULT RECORDS</p>
-                <p>cdcult.ru | cdcult@bk.ru</p>
+                <p>© 2024-2026 CDCOIL</p>
+                <p>cdcoil.ru | cdcoil@bk.ru</p>
             </div>
         </div>
     </footer>
@@ -530,7 +733,7 @@
 
         function toggleLanguage() {
             // Здесь можно добавить функционал переключения языка
-            alert('Переключение языка будет добавлено позже');
+            console.log('Переключение языка');
         }
 
         // Закрытие dropdown при клике вне его
@@ -552,10 +755,41 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    // Закрываем dropdown после клика
                     document.getElementById('dropdownMenu').classList.remove('active');
                 }
             });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
         });
     </script>
 </body>
