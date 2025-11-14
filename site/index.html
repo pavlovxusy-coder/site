@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDCULT RECORDS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: 1px solid #fff;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .btn-white {
+            background: #fff;
+            color: #000;
+        }
+
+        .btn-white:hover {
+            background: transparent;
+            color: #fff;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            background: #000;
+            border: 1px solid #fff;
+            min-width: 200px;
+            z-index: 1001;
+        }
+
+        .dropdown-menu.active {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 12px;
+            border-bottom: 1px solid #333;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 60px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .hero h2 {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .hero p {
+            font-size: 16px;
+            max-width: 600px;
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 20px;
+            border-top: 1px solid #333;
+        }
+
+        section h2 {
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 300;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .features {
+            list-style: none;
+            margin: 40px 0;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features li {
+            padding: 15px 0;
+            font-size: 16px;
+            border-bottom: 1px solid #333;
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        .features li:before {
+            content: "• ";
+            margin-right: 10px;
+        }
+
+        .mission {
+            margin-top: 40px;
+            font-size: 18px;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 30px;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        /* How It Works */
+        .steps {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            margin-bottom: 40px;
+            padding-left: 60px;
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 24px;
+            font-weight: bold;
+            opacity: 0.5;
+        }
+
+        .step-text {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* FAQ */
+        .faq {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #333;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .faq-answer {
+            font-size: 16px;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .cta-section h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 20px 40px;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+
+        .footer-info {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 20px;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero h2 {
+                font-size: 14px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .step {
+                padding-left: 40px;
+            }
+
+            header {
+                padding: 20px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">CDCULT RECORDS</div>
+        <div class="header-buttons">
+            <div class="dropdown">
+                <button class="btn" onclick="toggleDropdown()">ИНФО</button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="#about">О лейбле</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#cta">Отправить демо</a>
+                    <a href="#contact">Связаться с нами</a>
+                </div>
+            </div>
+            <button class="btn" onclick="toggleLanguage()">EN</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>CDCULT RECORDS —</h1>
+            <h2>МУЗЫКАЛЬНЫЙ ЛЕЙБЛ</h2>
+            <p>Загружай свою музыку на все цифровые площадки и получай прибыль с прослушиваний и продаж</p>
+            <div class="hero-buttons">
+                <a href="#cta" class="btn btn-white">СТАТЬ АРТИСТОМ</a>
+                <a href="#releases" class="btn">НАШИ РЕЛИЗЫ</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>О ЛЕЙБЛЕ</h2>
+            <div class="about-content">
+                <p>CDCULT RECORDS — независимый лейбл и дистрибьютор. Мы выводим музыку артистов на Spotify, Apple Music, YouTube Music, Яндекс.Музыка и более чем 150 других сервисов по всему миру.</p>
+                <ul class="features">
+                    <li>70% дохода — тебе</li>
+                    <li>Публикация за 3 дня</li>
+                    <li>Без скрытых комиссий</li>
+                    <li>Сохранение авторских прав</li>
+                    <li>Поддержка на всех этапах</li>
+                </ul>
+                <p class="mission">Наша миссия — дать каждому музыканту равные возможности для выхода на глобальный рынок.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats" class="stats-section">
+        <div class="container">
+            <h2>В ЦИФРАХ</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">ВСЕГДА НА СВЯЗИ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">ВЫПУЩЕННЫХ РЕЛИЗОВ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1 МЛН+</div>
+                    <div class="stat-label">ПРОСЛУШИВАНИЙ КАТАЛОГА</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2>КАК ЭТО РАБОТАЕТ</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-text">Напиши в поддержку или отправь демо на cdcult@bk.ru</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-text">Получи обратную связь и форму на заполнение релизов</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-text">Релиз выходит в выбранную дату. Выплаты — ежеквартально</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2>FAQ</h2>
+            <div class="faq">
+                <div class="faq-item">
+                    <div class="faq-question">Сколько стоит публикация?</div>
+                    <div class="faq-answer">Бесплатно. Мы получаем 30% от роялти.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Могу ли я забрать релиз обратно?</div>
+                    <div class="faq-answer">Да — в любой момент, без штрафов.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">С какими жанрами вы работаете?</div>
+                    <div class="faq-answer">С любыми.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta" class="cta-section">
+        <div class="container">
+            <h2>ГОТОВ К РЕЛИЗУ?</h2>
+            <p>Выбери, как отправить демо</p>
+            <a href="mailto:cdcult@bk.ru" class="btn btn-white">ОТПРАВИТЬ ДЕМО</a>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="social-links">
+                <a href="#">Telegram</a>
+                <a href="#">ВКонтакте</a>
+                <a href="#">TikTok</a>
+            </div>
+            <div class="footer-info">
+                <p>© 2024-2026 CDCULT RECORDS</p>
+                <p>cdcult.ru | cdcult@bk.ru</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown() {
+            const menu = document.getElementById('dropdownMenu');
+            menu.classList.toggle('active');
+        }
+
+        function toggleLanguage() {
+            // Здесь можно добавить функционал переключения языка
+            alert('Переключение языка будет добавлено позже');
+        }
+
+        // Закрытие dropdown при клике вне его
+        document.addEventListener('click', function(event) {
+            const dropdown = document.querySelector('.dropdown');
+            const menu = document.getElementById('dropdownMenu');
+            if (!dropdown.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+
+        // Плавная прокрутка для якорных ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Закрываем dropdown после клика
+                    document.getElementById('dropdownMenu').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
